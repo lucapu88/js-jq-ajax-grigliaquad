@@ -15,9 +15,9 @@
   height: 70px;
   display: flex;
 }
-.yellow.active {
+.yellow {
   background-color: yellow;
 }
-.green.active {
+.green {
   background-color: green;
 }
