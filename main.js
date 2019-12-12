@@ -10,24 +10,27 @@ $(document).ready(function() {
       $('.quadrati-container').append('<div class="quadrato"></div>');
   };
   $('.quadrato').click(function(){ //dopo aver creato la griglia 6x6, al click sul singolo quadrato parte una richiesta ad ajax
-    var quadratoCliccato = $(this); // creo una var per selezionare solo il quadrato cliccato
-    $.ajax(
-      {
-        url : "https://flynn.boolean.careers/exercises/api/random/int", // indirizzo del server che chiamo dove viene generato un numero casuale da 0 a 9
-        method : "GET", //indico come metodo GET per chiedere dati all'url
-        success : function (data) {
-            if (data.response <= 5) { //se response dell'url è minore/uguale a 5
-              $(quadratoCliccato).addClass('yellow').text(data.response); //aggiungo la classe yellow per colorare il quadrato di giallo e inserisco il numero casuale del response all'interno del quadrato
-            } else { //se response dell'url è maggiore di 5
-              $(quadratoCliccato).addClass('green').text(data.response); //aggiungo la classe green per colorarlo di verde e inserisco il numero casuale del response all'interno del quadrato
-            }
-        },
-        error : function (err) {
-          if (err == 404) {
-            $('body').append('<h1> ERROREEEEEE: CONTROLLA IL TUO URL </h1>');
+    var quadratoCliccato = $(this); //creo una var per selezionare solo il quadrato cliccato
+    if (!quadratoCliccato.hasClass('yellow') && !quadratoCliccato.hasClass('green')) { //faccio in modo che se il quadrato non cambi proprietà se cliccato più volte
+      $.ajax(
+        {
+          url : "https://flynn.boolean.careers/exercises/api/random/int", // indirizzo del server che chiamo dove viene generato un numero casuale da 0 a 9
+          method : "GET", //indico come metodo GET per chiedere dati all'url
+          success : function (data) {
+              if (data.response <= 5) { //se response dell'url è minore/uguale a 5
+                $(quadratoCliccato).addClass('yellow').text(data.response); //aggiungo la classe yellow per colorare il quadrato di giallo e inserisco il numero casuale del response all'interno del quadrato
+              } else { //se response dell'url è maggiore di 5
+                $(quadratoCliccato).addClass('green').text(data.response); //aggiungo la classe green per colorarlo di verde e inserisco il numero casuale del response all'interno del quadrato
+              }
+          },
+          error : function (err) {
+            if (err == 404) {
+              $('body').remove('<div class="quadrati-container"></div>', '<div class="quadrato"></div>');
+              $('body').append('<h1> ERROREEEEEE: CONTROLLA IL TUO URL </h1>');
+            }   //PERCHE' NON FUNZIONA?
           }
-        }
-      });
+        });
+    }
   });
 
 });
