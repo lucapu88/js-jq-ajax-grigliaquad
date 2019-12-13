@@ -22,12 +22,12 @@ $(document).ready(function() {
               } else { //se response dell'url è maggiore di 5
                 $(quadratoCliccato).addClass('green').text(data.response); //aggiungo la classe green per colorarlo di verde e inserisco il numero casuale del response all'interno del quadrato
               }
-          },
+            },
           error : function (err) {
             if (err == 404) {
               $('body').remove('<div class="quadrati-container"></div>', '<div class="quadrato"></div>');
               $('body').append('<h1> ERROREEEEEE: CONTROLLA IL TUO URL </h1>');
-            }   //PERCHE' NON FUNZIONA?
+            }
           }
         });
     }
