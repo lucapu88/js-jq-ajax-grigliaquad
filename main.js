@@ -4,10 +4,10 @@
 
 $(document).ready(function() {
   for (var i = 0; i < 6; i++) { //creo un ciclo for per generare 6 contenitori di quadrati
-      $('body').append('<div class="quadrati-container"></div>');
+    $('body').append('<div class="quadrati-container"></div>');
   };
   for (var i = 0; i < 6; i++) { //creo un altro ciclo for per creare 6 quadrati all'interno dei 6 contenitori
-      $('.quadrati-container').append('<div class="quadrato"></div>');
+    $('.quadrati-container').append('<div class="quadrato"></div>');
   };
   $('.quadrato').click(function(){ //dopo aver creato la griglia 6x6, al click sul singolo quadrato parte una richiesta ad ajax
     var quadratoCliccato = $(this); //creo una var per selezionare solo il quadrato cliccato
@@ -24,8 +24,8 @@ $(document).ready(function() {
               }
             },
           error : function (err) {
-            if (err == 404) {
-              $('body').remove('<div class="quadrati-container"></div>', '<div class="quadrato"></div>');
+            if (err.status == 404) {
+              $('.quadrati-container').remove();
               $('body').append('<h1> ERROREEEEEE: CONTROLLA IL TUO URL </h1>');
             }
           }
